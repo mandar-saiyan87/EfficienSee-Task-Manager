@@ -41,12 +41,56 @@ router.post("/register", async (req, res) => {
       { expiresIn: "1 day" }
     );
 
+    // Return Newuser with token
     return res.status(201).json({
       message: "New user created successfully",
       user: {
         id: newUser._id,
         email: newUser.emailId,
         username: newUser.username,
+        token,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// POST: Login with User
+router.post("/login", async (req, res) => {
+  try {
+    const currentuser = await Users.findOne({
+      $or: [{ emailId: req.body.username }, { username: req.body.username }],
+    }).select("+password");
+
+    if (!currentuser) {
+      return res.status(400).json({ message: "User does not exist!." });
+    }
+
+    const passwordValidate = await bcrypt.compare(
+      req.body.password,
+      currentuser.password
+    );
+
+    if (!passwordValidate) {
+      return res.status(400).json({ message: "Invalid password." });
+    }
+
+    const token = jwt.sign(
+      { id: currentuser._id, email: currentuser.emailId },
+      JWT_SECRET,
+      {
+        expiresIn: "1 day",
+      }
+    );
+
+    return res.status(200).json({
+      message: "Login successful",
+      user: {
+        id: currentuser._id,
+        username: currentuser.username,
+        email: currentuser.emailId,
         token,
       },
     });
