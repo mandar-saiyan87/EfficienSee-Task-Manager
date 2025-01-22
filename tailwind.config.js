@@ -6,6 +6,10 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "serif"],
       },
+      colors: {
+        primary: "#f87171",
+        secondary: "#475569",
+      },
     },
   },
   plugins: [],

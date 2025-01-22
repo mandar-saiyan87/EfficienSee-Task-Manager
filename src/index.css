@@ -8,9 +8,21 @@
   body {
     @apply m-0 p-0 font-poppins antialiased overflow-x-hidden;
   }
+
+  input[type="text"],
+  input[type="email"] {
+    @apply py-3 px-2 rounded-md border-[1px] border-slate-400 focus:outline-none focus:border-2 focus:border-primary;
+  }
 }
 
 @layer components {
+  .navtabs li {
+    @apply cursor-pointer;
+  }
+
+  .autbtn {
+    @apply text-base cursor-pointer font-medium py-1 px-3 rounded-md md:text-lg md:py-2 md:px-5;
+  }
 }
 
 @layer utilities {
