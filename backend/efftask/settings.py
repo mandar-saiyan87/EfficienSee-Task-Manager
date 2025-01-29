@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'api',
     'users',
+    'taskapp',
 ]
 
 AUTH_USER_MODEL = 'users.User'
