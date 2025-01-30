@@ -40,8 +40,6 @@ class UserLogin(APIView):
         username_or_email = request.data.get('username_or_email')
         password = request.data.get('password')
 
-        print(f"{username_or_email}\n{password}")
-
         response_data = {}
         if not username_or_email or not password:
             response_data["message"] = "Username/Email and password are required"
