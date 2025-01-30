@@ -3,6 +3,10 @@ from .models import UserTasks
 
 
 class UserTasksSerializer(serializers.ModelSerializer):
+
+    task_username = serializers.CharField(
+        source='task_owner.username', read_only=True)
+
     class Meta:
         model = UserTasks
         fields = "__all__"
